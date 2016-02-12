@@ -3,14 +3,18 @@
 //hw03 -- Convert
 //CSE2
 
-//Enter the distance in meters: 34.23
-//34.23 meters is 1347.6378 inches.
+import java.util.Scanner; //imports the scanner method
 
-//Enter the distance in meters: 15.25
-//15.25 meters is 600.3937 inches.
-
-//scanner code here...
-
-public class Convert {
-    
-}
+public class Convert { //start class
+    public static void main(String[] args) { //start main method
+    Scanner meterScanner = new Scanner (System.in); //declaring Scanner
+    System.out.println("How many meters would you like to convert (in form xx.x):"); //Asks user how many 
+                                                                                     //meters they would like to convert into inches
+    double numMeters = meterScanner.nextDouble(); //declares and stores value in object 
+                                                  //Stores take user's input.
+    double inchInMeter = 39.3701; //stores the inch to meter conversion
+    double meterConversion = ((int)(numMeters*inchInMeter*10000)); //converts meters into inches using arithmetic
+    System.out.println("There are " + meterConversion/10000 +" inches in "+ numMeters + " meters."); //prints out conversion and meters to 
+                                                                                                     //allow user to see what the conversion is. 
+    }//end main method
+}//end class
