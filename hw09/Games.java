@@ -42,7 +42,7 @@ public class Games{
         String colorPick = "";
         String colorPickLow = "";
         int numVal= 0;
-        
+
         if (colorNum == 0){
             colorPick = "Black"; //later will allow us to check for upper and lower case words
             colorPickLow = "black";
@@ -53,9 +53,14 @@ public class Games{
         int randNum = (int) (Math.random()*4) + 1; //determines random number for wheel spin
         numVal += randNum + 1;
         if (a > 5){ //tells the user that their input was invalid
-            System.out.println("Why? That's not even a possibility! Any way...");
+            System.out.println("That's not a possibility! Try again! ");
+            System.out.println("Spin the Wheel! Choose a color (red, black) and a number (1 - 5).");
+            Scanner scanner = new Scanner(System.in);
+            String spinColor = scanner.next(); //records a string input
+            int spinNum = scanner.nextInt(); //records the int input
+            spinTheWheel(spinColor, spinNum);
         }
-        if ((b.equals(colorPick)) || (b.equals(colorPickLow)) && (a == numVal)){ //checks to see whether user wins or loses
+        else if ((b.equals(colorPick)) || (b.equals(colorPickLow)) && (a == numVal)){ //checks to see whether user wins or loses
             System.out.println("Congrats! You've just won a brand new car!");
         } else {
             System.out.println("You lose! It was " + colorPick + " " + numVal);
@@ -85,18 +90,38 @@ public class Games{
     
     public static void main(String[] arg){
         Scanner scanner = new Scanner(System.in); 
-        System.out.print("Pick a box. 1, 2, or 3: ");
-        int boxNum = scanner.nextInt(); //records user's input
-        guessTheBox(boxNum); //calls box method
         
-        System.out.println("Spin the Wheel! Choose a color (red, black) and a number (1 - 5).");
-        String spinColor = scanner.next(); //records a string input
-        int spinNum = scanner.nextInt(); //records the int input
-        spinTheWheel(spinColor, spinNum); //calls wheel method
+        System.out.println("Welcome to the Cool Beans game center.");
+        System.out.println("");
+        System.out.println("Would you like to play: ");
+        System.out.println("Guess the Box");
+        System.out.println("Spin the Wheel");
+        System.out.println("Word Scramble");
+        System.out.println("");
+        System.out.print("Please enter the name of the game you would like to play: ");
         
-        System.out.print("Enter a word: ");
-        String scramblerWord = scanner.next(); //records the string input
-        scrambler(scramblerWord); //calls scramble method
+        String gameChoice = scanner.nextLine();
+        
+        if (gameChoice.equals("Guess the Box")){
+            System.out.print("Pick a box. 1, 2, or 3: ");
+            int boxNum = scanner.nextInt(); //records user's input
+            guessTheBox(boxNum); //calls box method
+        } 
+        else if (gameChoice.equals("Spin the Wheel")){
+            System.out.println("Spin the Wheel! Choose a color (red, black) and a number (1 - 5).");
+            String spinColor = scanner.next(); //records a string input
+            int spinNum = scanner.nextInt(); //records the int input
+            spinTheWheel(spinColor, spinNum); //calls wheel method
+        } 
+        else if (gameChoice.equals("Word Scramble")){
+            System.out.print("Enter a word: ");
+            String scramblerWord = scanner.next(); //records the string input
+            scrambler(scramblerWord); //calls scramble method
+        } else {
+            System.out.println("Sorry, we do not have that game available at this game center. Come again soon! Thank you.");
+            
+        }
+        
     } //end of main method
     
 } //end of public class Games
