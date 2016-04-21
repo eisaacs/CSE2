@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class CSE2Linear{
     
-    private static void printArray(int[] array) {
+    private static void printArray(int[] array) { //method that prints a given array
         String newStrng = " ";
         for (int i = 0; i < array.length; i++) {
             if (i > 0) {
@@ -14,7 +14,7 @@ public class CSE2Linear{
         
     }
     
-    public static int[] randomize(int[] c){
+    public static int[] randomize(int[] c){ //randomizes a given array
         int temp = 0;
         
         for (int i = 0; i < 30; i++){
@@ -24,19 +24,18 @@ public class CSE2Linear{
             c[r1] = c[0];
             c[0] = temp;
         }
-        return c;
+        return c; //returns array c
     }
     
-    public static void binarySearch(int[] array, int searchVal){
+    public static void binarySearch(int[] array, int searchVal){ //uses binary serach to look for a given value
         int lowVal = 0;
         int highVal = array.length - 1;
         int t = 1;
-        //boolean finder = false;
         while (lowVal < highVal){
             int mid = ((lowVal+highVal)/2);
             if(array[mid] > searchVal){
                 highVal = mid - 1 ;
-                t++;
+                t++; //t keeps track of the number of iterations
             } else if (array[mid] < searchVal){
                 lowVal= mid + 1;
                 t++;
@@ -49,11 +48,11 @@ public class CSE2Linear{
     }
     
     
-    public static void linearSearch(int[] array, int searchVal){
+    public static void linearSearch(int[] array, int searchVal){ //linear searches an array
         int i = 0;
-        while(searchVal != array[i]){
+        while(searchVal != array[i]){ //will run until it is equal to the target val
             i++;
-            if (i == array.length -1){
+            if (i == array.length -1){ //if target never found it will run this. 
                 System.out.println("Did not find " + searchVal + " with " + (i + 1) + " iterations.");
                 return;
             }
@@ -66,10 +65,9 @@ public class CSE2Linear{
     public static void main(String[] args){
         int[] gradeArray = new int[15];
         Scanner gradeScanner = new Scanner(System.in);
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 15; i++){ //creates an array for grades inputted by user. 
             System.out.println("Please input grade #" + (i+1));
-            if(gradeScanner.hasNextInt()){
-                //int arrayPushInt = Integer.parseInt(arrayPush);
+            if(gradeScanner.hasNextInt()){ //if it is an integer, then this will run. 
                 int arrayPushInt = gradeScanner.nextInt();
                 
                 if (i > 1 && arrayPushInt < (gradeArray[i-1])){
@@ -84,14 +82,14 @@ public class CSE2Linear{
                     System.out.println("Please enter an integer.");
                     i--;
                 }
-            } else {
+            } else { //if it's not an integer, then this statement will run. 
                 System.out.println("Please enter an integer.");
                 gradeScanner.next();
                 i--;
             }
         }
-        System.out.println("Normal array: ");
-        printArray(gradeArray);
+        System.out.println("Normal array: "); //out puts all the info for user to see.
+        printArray(gradeArray);               // also runs methods, and askes for user's input
         System.out.println("\nWhat value would you like to search for?");
         int searchNormArray = gradeScanner.nextInt();
         binarySearch(gradeArray, searchNormArray);
