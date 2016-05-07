@@ -9,7 +9,7 @@ import java.util.Scanner; //importing the scanner method
 public class Check {
     public static void main(String[] args) {
        Scanner dinnerScanner = new Scanner (System.in); //declaring tipScanner; 'new' object
-       System.out.println("Dinner's cost (in form xx:xx): $"); //prints out string so that user knows what to type in 
+       System.out.println("Dinner's cost (in form xx.xx): $"); //prints out string so that user knows what to type in 
        double checkCost = dinnerScanner.nextDouble(); //creates object to hold the total cost of dinner information
        
        System.out.println("Tip percent (in form xx.x: ");//prints out string so that user knows to type in tip percent

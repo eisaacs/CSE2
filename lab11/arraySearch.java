@@ -3,75 +3,88 @@ import java.util.Random;
 //import jave.util.Random; 
 
 public class arraySearch{
-    
    
-    public static void main(String[] args){
+    private static void printArray(int[] array) { //method that prints a given array
+        String newStrng = " ";
+        for (int i = 0; i < array.length; i++) {
+            if (i > 0) {
+                System.out.print(", ");
+            }
+            System.out.print(array[i]);
+        }
         
-        int[] array1 = new int[100];
-        int[] array2 = new int[100];
-        
+    }
     
-        for (int i = 0; i < 100; i++){
-            int randNum100 = (int)(Math.random()*100);
-            array1[i] = randNum100;
-        }
-        
-        int highVal1 = array1[0];
-        int lowVal1 = array1[0];
-        
-        int highVal2 = array2[0];
-        int lowVal2 = array2[0];
-        
-
-        int increaserNum = 0;
-        for (int j = 0; j < 100; j++){
-            int randNumIncr = (int)(Math.random()*100) + increaserNum; //so the next index will be higher than the previous
-            array2[j] = randNumIncr;
-            increaserNum = randNumIncr;
-        }
-        
-        for(int k = 0; k < 100; k++){
-            if (highVal1 <= array1[k]){
-                highVal1 = array1[k];
-            } 
-            if(lowVal1 >= array1[k]){
-                lowVal1 = array1[k];
+    public static void linearSearch(int[] array){
+        int min = array[0];
+        int max = array[0];
+        for (int t = 0; t < array.length - 1; t++){
+            if (min > array[t]){
+                min = array[t];
+            }
+            if (max < array[t]){
+                max = array[t];
             }
         }
-        
+        System.out.print("The maximum value is " + max + ", and the minimum value is "+ min +".");
+    }
     
-        System.out.println("Maximum value in array1 is " + highVal1 + ".");
-        System.out.println("Minimum value in array1 is " + lowVal1 +  ".");
-        
-        System.out.println("Maximum value in array1 is " + array2[99] + ".");
-        System.out.println("Minimum value in array1 is " + array2[0] +  ".");
-        
-        
-        System.out.print("\nPlease enter an int: ");
-        Scanner indexInput = new Scanner(System.in);
-        int inputValInt = indexInput.nextInt();
-        //int[] indexNumArray = array2[inputValInt];
-        
-        if(inputValInt >= 0){
-            int highBinVal = array2.length - 1;
-            int lowBinVal = 0;
-            while (lowBinVal <= highBinVal){
-                int midBinVal = (int)(lowBinVal + (highBinVal - lowBinVal) / 2);
-                if(inputValInt > array2[midBinVal]){
-                    lowBinVal = midBinVal + 1;
-                    //System.out.println(lowBinVal+"");
-                } else if (inputValInt < array2[midBinVal]){
-                    highBinVal = midBinVal -1;
-                    //System.out.println(""+highBinVal);
-                } else {
-                    return;
-                }
-            System.out.println("The number above the key is " + array1[highBinVal] +"." );
-            System.out.println("The number below the key is " + array2[lowBinVal]+ "." );   
-            } 
-        }else{
-            System.out.println("Goodbye");
-            return;
+    public static void linTargetSearch(int min, int max, int target, int[] array){
+        for(int i=0; i < array.length; i++){
+           if((i > 1) && (target < array[i]) && (target > array[i -1])){
+               System.out.println("The above value is " + array[i] + ", and the below value is " + array[i-1] + ".");
+               return;
+           } else if ((i == 0) && (target < array[i])){
+               System.out.println("The above value is " + array[i]);
+               return;
+           } else if (i == array.length - 1){
+               System.out.println("The below value is " + array[array.length - 1]);
+               return;
+           }
         }
+        
+    }
+    
+    public static void binarySearch(int[] array, int target){
+        int max = array[array.length - 1];
+        int min = array[0];
+        int mid = 0;
+        while (min < max){
+            mid = ((min+max)/2);
+            if (target > mid){
+                min = mid + 1;
+            } else if (target < mid){
+                max = mid - 1;
+            } else {
+                System.out.println("Found "+ target + "!");
+                return;
+            }
+        }
+        System.out.println("Did not find "+ target+".");
+        linTargetSearch(min, max, target, array);
+        return;
+    }
+   
+    public static void main(String[] args){ 
+        
+        Random rand = new Random();
+        Scanner scan = new Scanner(System.in);
+        
+        int[] firstArray = new int[50];
+        for (int i = 0; i < firstArray.length - 1 ; i++){
+            firstArray[i] = rand.nextInt(101);
+        }
+       
+        int[] secondArray = new int[50];
+        for (int k = 0; k < secondArray.length ; k++){
+            secondArray[k]=(rand.nextInt(10)+(k*10));
+        }
+        
+        //printArray(secondArray);
+        
+        linearSearch(firstArray);
+        System.out.println("\nThe min for array2 is " + secondArray[0] + " and the max is " +secondArray[49] +".\nWhat value would you like to search for?");
+        int target = scan.nextInt();
+        binarySearch(secondArray, target);
     }
 }
